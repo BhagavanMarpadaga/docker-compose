@@ -9,14 +9,14 @@ const pg_1 = require("pg");
 const redis = require('redis');
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 const main = () => {
     const client = new pg_1.Client({
         user: "example",
-        host: "localhost",
+        host: "db",
         database: "test",
         password: "example",
-        port: 5431,
+        port: 5432,
     });
     client
         .connect()

@@ -6,15 +6,15 @@ const redis = require('redis');
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 const main = () => {
   const client = new Client({
     user: "example",
-    host: "localhost",
+    host: "postgres",
     database: "test",
     password: "example",
-    port: 5431,
+    port: 5432,
   });
 
   client
@@ -26,11 +26,13 @@ const main = () => {
       console.error("Error connecting to the database:", err);
     });
     const rediclient = redis.createClient({
-      host: 'localhost', // Redis server host
+      host: 'redis', // Redis server host
       port: 6379,        // Redis server port
     });
     rediclient.connect().then(()=>{
       console.log('connected to redis successfully')
+    }).catch(()=>{
+      console.log("Error while connecting to redis")
     })
 };
 main();
