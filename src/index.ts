@@ -26,13 +26,16 @@ const main = () => {
       console.error("Error connecting to the database:", err);
     });
     const rediclient = redis.createClient({
-      host: 'redis', // Redis server host
-      port: 6379,        // Redis server port
+      socket: {
+        host: "redis",
+        port: 6379
+      }
+      // Redis server port
     });
     rediclient.connect().then(()=>{
       console.log('connected to redis successfully')
-    }).catch(()=>{
-      console.log("Error while connecting to redis")
+    }).catch((err:any)=>{
+      console.log("Error while connecting to redis",err)
     })
 };
 main();
